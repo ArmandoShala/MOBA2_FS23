@@ -6,8 +6,17 @@ import TrafficLightCasing from "./trafficLightCasing/trafficLightCasing";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
-        <TrafficLightCasing/>
-        <TrafficLightCasing/>
+        <div style={
+            {
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                flexWrap: "wrap"
+            }
+        }>
+            <TrafficLightCasing/>
+            <TrafficLightCasing/>
+        </div>
     </React.StrictMode>
 );
 
