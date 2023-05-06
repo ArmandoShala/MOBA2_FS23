@@ -39,7 +39,7 @@ struct ContentView: View {
                     NumberButton(text: "7", result: $result)
                     NumberButton(text: "8", result: $result)
                     NumberButton(text: "9", result: $result)
-                    OperatorButton(text: "x", result: $result)
+                    OperatorButton(text: "*", result: $result)
                 }
                 HStack {
                     NumberButton(text: "4", result: $result)
@@ -86,7 +86,7 @@ func buttonAction(text: String, result: Binding<Double>) {
     } else if (text == "=") {
         setNumberForCalculation(number: result.wrappedValue)
         result.wrappedValue = performCalculation()
-    } else if (text == "+" || text == "-" || text == "x" || text == "/") {
+    } else if (text == "+" || text == "-" || text == "*" || text == "/") {
         operatorSymbol = text
         firstNumberEntered = true
         setNumberForCalculation(number: result.wrappedValue)
@@ -117,20 +117,14 @@ func setNumberForCalculation(number: Double) {
 func performCalculation() -> Double {
     firstNumberEntered = false // reset
     secondNumberEntered = false // reset
-    var subResult = 0.0
-    switch operatorSymbol {
-    case "+":
-        subResult = firstNumber! + secondNumber!
-    case "-":
-        subResult = firstNumber! - secondNumber!
-    case "x":
-        subResult = firstNumber! * secondNumber!
-    case "/":
-        subResult = firstNumber! / secondNumber!
-    default:
+
+    let expressoin = NSExpression(format: "\(firstNumber!) \(operatorSymbol) \(secondNumber!)")
+    if let subResult = expressoin.expressionValue(with: nil, context: nil) as? Double {
+        return subResult
+    } else {
         print("Error")
+        return 0.0
     }
-    return subResult
 }
 
 struct BaseButton: View {
