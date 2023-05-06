@@ -50,7 +50,6 @@ struct StopEntry: Decodable {
     var departureTimestamp: Int64
 }
 
-
 struct ContentView: View {
     @State var data = [BoardEntry]()
     @State var station = "Zurich"
