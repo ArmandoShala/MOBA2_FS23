@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Button, View, StyleSheet, Text, SafeAreaView } from 'react-native';
+import {Button, View, StyleSheet, Text, SafeAreaView} from 'react-native';
 
 const styles = StyleSheet.create({
     OuterView: {
@@ -32,13 +32,14 @@ const styles = StyleSheet.create({
     },
 });
 
-const getWeather = async () => {
-    const url = 'https://api.openweathermap.org/data/2.5/weather?q=Seattle&appid=f17a89919ffa378865b4cb68c1ca05c1';
+const getWeather = async (cityName) => {
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=f17a89919ffa378865b4cb68c1ca05c1`;
     try {
         const response = await fetch(url);
         return await response.json();
     } catch (error) {
         console.error(error);
+        return error;
     }
 }
 
@@ -88,11 +89,11 @@ const getWeatherIcon = (icon) => {
 
 const convertKelvinToCelsius = (kelvin) => Math.round((kelvin - 273.15) * 100) / 100;
 
-export function DetailPage({navigation}) {
+export function DetailPage({navigation, route}) {
     const [weatherData, setWeatherData] = React.useState(null);
     React.useEffect(() => {
         (async () => {
-            const data = await getWeather();
+            const data = await getWeather(route.params.inputCity);
             setWeatherData(data);
         })();
     }, []);
@@ -112,13 +113,13 @@ export function DetailPage({navigation}) {
             <View style={styles.OuterView}>
 
                 <View style={styles.View}>
-                    <Text style={styles.Text}>{weatherData.weather[0].description} in {weatherData.name} {getWeatherIcon(weatherData.weather[0].icon)}</Text>
+                    <Text
+                        style={styles.Text}>{weatherData.weather[0].description} in {weatherData.name} {getWeatherIcon(weatherData.weather[0].icon)}</Text>
                 </View>
 
                 <View style={styles.View}>
-                    <Text style={[styles.Text, styles.inlineText]}>Currently
-                        its {convertKelvinToCelsius(weatherData.main.temp)}°C</Text>
-                    <Text style={[styles.Text, styles.inlineText]}>Feels
+                    <Text style={[styles.Text]}>Currently it's {convertKelvinToCelsius(weatherData.main.temp)}°C</Text>
+                    <Text style={[styles.Text]}>Feels
                         like {convertKelvinToCelsius(weatherData.main.feels_like)}°C</Text>
                 </View>
 
