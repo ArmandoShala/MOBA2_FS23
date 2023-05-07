@@ -14,7 +14,7 @@ struct JsonResponse: Decodable {
     var results: [Album]
 }
 
-struct Album: Codable, Identifiable {
+struct Album: Codable, Identifiable, Hashable {
     var id: Int {
         get {
             UUID().uuidString.hashValue
@@ -24,15 +24,15 @@ struct Album: Codable, Identifiable {
     let collectionType: String
     let artistId: Int
     let collectionId: Int
-    let amgArtistId: Int
+    let amgArtistId: Int?
     let artistName: String
     let collectionName: String
     let collectionCensoredName: String
-    let artistViewUrl: String
+    let artistViewUrl: String?
     let collectionViewUrl: String
     let artworkUrl60: String
     let artworkUrl100: String
-    let collectionPrice: Double
+    let collectionPrice: Double?
     let collectionExplicitness: String
     let trackCount: Int
     let copyright: String
@@ -45,39 +45,93 @@ struct Album: Codable, Identifiable {
 
 struct ContentView: View {
     @State var data = [Album]()
-    var body: some View {
-        NavigationStack {
-            List {
-                ForEach(data) { album in
-                    Text(album.collectionName)
-                }
+    @State private var searchText = ""
+    @State var searchQuery = "50 Cent"
+
+    private var searchResults: [Album] {
+        if searchText.isEmpty {
+            return data
+        } else {
+            return data.filter {
+                $0.collectionName.contains(searchText)
             }
-                    .task {
-                        await loadData()
-                    }
         }
-                .padding()
     }
 
+    var body: some View {
+        VStack{
+            Text("Search for a band:")
+        TextField(
+                "Search for a band",
+                text: $searchQuery,
+                onCommit: {
+                    Task {
+                        await loadData()
+                    }
+                    })
+                .padding()
+                .frame(width: 300, height: 50)
+                .background(Color.white)
+                .cornerRadius(10)
+                .shadow(radius: 10)
+                .padding()
+        }
+
+        NavigationStack {
+            VStack {
+                List {
+                    ForEach(searchResults, id: \.self) { album in
+                        HStack {
+                            // add image from album.artworkUrl60
+                            AsyncImage(url: URL(string: album.artworkUrl60)) { image in
+                                image.fixedSize().frame(width: 60, height: 60)
+                            } placeholder: {
+                                ProgressView()
+                            }
+                            VStack (alignment: .leading){
+                                Text(album.collectionName).font(.headline)
+                                Text(album.artistName).font(.subheadline)
+                            }
+                        }
+                    }
+                }
+                        .listStyle(.plain)
+                        .navigationTitle("Search for \(searchQuery)")
+                        .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
+                            ForEach(searchResults, id: \.self) { album in
+                                Text(album.collectionName).searchCompletion(album)
+                            }
+                        }
+                        .task {
+                            await loadData()
+                        }
+
+            }
+
+        }
+
     func loadData() async {
-        guard let url = URL(string: "https://itunes.apple.com/search?term=rolling+stones&entity=album") else {
+        guard let url = URL(string: "https://itunes.apple.com/search?term=\(searchQuery.lowercased().replacingOccurrences(of: " ", with: "+"))&entity=album") else {
             print("Invalid URL")
             return
         }
 
+        let urlRequest = URLRequest(url: url)
+
         do {
-            let (data, _) = try await URLSession.shared.data(from: url)
-            if let decodedResponse = try? JSONDecoder().decode(JsonResponse.self, from: data) {
-                self.data = decodedResponse.results
-            } else {
-                print("Invalid response from server")
+            let (data, response): (Data, URLResponse)
+            (data, response) = try await URLSession.shared.data(for: urlRequest)
+
+            guard (response as? HTTPURLResponse)?.statusCode == 200 else {
+                fatalError("Error while fetching data")
             }
+
+            let decodedResponse = try JSONDecoder().decode(JsonResponse.self, from: data)
+            self.data = decodedResponse.results
         } catch {
-            print("Error: \(error.localizedDescription)")
+            print(error)
         }
-
-    }
-
+}
 }
 
 struct ContentView_Previews: PreviewProvider {
