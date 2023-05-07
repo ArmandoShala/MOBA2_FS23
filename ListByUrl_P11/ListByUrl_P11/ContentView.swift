@@ -59,22 +59,22 @@ struct ContentView: View {
     }
 
     var body: some View {
-        VStack{
+        VStack {
             Text("Search for a band:")
-        TextField(
-                "Search for a band",
-                text: $searchQuery,
-                onCommit: {
-                    Task {
-                        await loadData()
-                    }
+            TextField(
+                    "Search for a band",
+                    text: $searchQuery,
+                    onCommit: {
+                        Task {
+                            await loadData()
+                        }
                     })
-                .padding()
-                .frame(width: 300, height: 50)
-                .background(Color.white)
-                .cornerRadius(10)
-                .shadow(radius: 10)
-                .padding()
+                    .padding()
+                    .frame(width: 300, height: 50)
+                    .background(Color.white)
+                    .cornerRadius(10)
+                    .shadow(radius: 10)
+                    .padding()
         }
 
         NavigationStack {
@@ -88,7 +88,7 @@ struct ContentView: View {
                             } placeholder: {
                                 ProgressView()
                             }
-                            VStack (alignment: .leading){
+                            VStack(alignment: .leading) {
                                 Text(album.collectionName).font(.headline)
                                 Text(album.artistName).font(.subheadline)
                             }
@@ -98,17 +98,17 @@ struct ContentView: View {
                         .listStyle(.plain)
                         .navigationTitle("Search for \(searchQuery)")
                         .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
-                            ForEach(searchResults, id: \.self) { album in
-                                Text(album.collectionName).searchCompletion(album)
-                            }
-                        }
-                        .task {
-                            await loadData()
-                        }
-
+                ForEach(searchResults, id: \.self) { album in
+                    Text(album.collectionName).searchCompletion(album)
+                }
             }
+                    .task {
+                        await loadData()
+                    }
 
         }
+
+    }
 
     func loadData() async {
         guard let url = URL(string: "https://itunes.apple.com/search?term=\(searchQuery.lowercased().replacingOccurrences(of: " ", with: "+"))&entity=album") else {
@@ -131,7 +131,7 @@ struct ContentView: View {
         } catch {
             print(error)
         }
-}
+    }
 }
 
 struct ContentView_Previews: PreviewProvider {

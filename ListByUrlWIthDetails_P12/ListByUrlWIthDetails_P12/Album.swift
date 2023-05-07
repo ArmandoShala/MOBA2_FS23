@@ -33,20 +33,11 @@ struct Album: Codable, Identifiable, Hashable {
     let copyright: String
     let country: String
     let currency: String
-    var releaseDate: String
-
-//    var releaseDate: String {
-//        get {
-    // format releaseDate from yyyy-MM-ddT00:00:00Z to yyyy
-//            let dateFormatter = DateFormatter()
-//            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-//            let date = dateFormatter.date(from: self.releaseDate)
-//            dateFormatter.dateFormat = "yyyy"
-//            return dateFormatter.string(from: date!)
-//            return String(self.releaseDate.prefix(4))
-//        }
-//
-//    }
-
+    let releaseDate: String
+    var releaseYear: String {
+        get {
+            String(releaseDate.prefix(4))
+        }
+    }
     let primaryGenreName: String
 }

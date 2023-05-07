@@ -5,25 +5,28 @@
 import SwiftUI
 
 struct DetailView: View {
-    @State var track: [Track]
+    @State var tracks: [Track]
+    @State var collectionId: Int
     var collectionName: String
-    var releaseDate: String
-    var artworkUrl100: String
+    var releaseYear: String
+    @State var artworkUrl: String
 
     var body: some View {
         VStack {
-            Text(collectionName)
-            Text(releaseDate)
-            AsyncImage(url: URL(string: artworkUrl100)) { image in
-                image.fixedSize().frame(width: 100, height: 100)
+            Text(collectionName).font(.title)
+            Text(releaseYear).font(.subheadline)
+            AsyncImage(url: URL(string: artworkUrl)) { image in
+                image.resizable().aspectRatio(contentMode: .fit)
             } placeholder: {
                 ProgressView()
             }
             List {
-                ForEach(track, id: \.self) { track in
+                ForEach(tracks, id: \.self) { track in
                     HStack {
-                        Text(track.trackName)
+                        Text(String(track.trackNumber ?? 0))
+                        Text(track.trackName ?? "Unknown")
                         Spacer()
+                        Text(track.duration ?? "Unknown")
                     }
                 }
             }
@@ -31,8 +34,15 @@ struct DetailView: View {
                 .onAppear {
                     Task {
                         do {
-//                            https://itunes.apple.com/lookup?id=%3CcollectionId%3E&entity=song
-                            track = try await loadData(url: "https://itunes.apple.com/lookup?id=\(track.collectionId)&entity=song")
+                            // set tracks to the result of loadData where "wrapperType" == "track"
+                            tracks = try await loadData(url: "https://itunes.apple.com/lookup?id=\(collectionId)&entity=song")
+                            self.artworkUrl = tracks.first(where: { $0.wrapperType == "collection" })?.artworkUrl100
+                                    ?? tracks.first(where: { $0.wrapperType == "collection" })?.artworkUrl60
+                                    ?? ""
+                            tracks.removeAll(where: { $0.wrapperType == "collection" })
+
+                            // get artworkUrl from wrapperType == "collection"
+
                         } catch {
                             print(error)
                         }

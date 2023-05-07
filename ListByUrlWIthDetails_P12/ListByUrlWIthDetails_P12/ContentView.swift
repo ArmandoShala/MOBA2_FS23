@@ -49,7 +49,7 @@ struct ContentView: View {
 
             VStack {
                 List(data) { album in
-                    NavigationLink(destination: DetailView(track: album)) {
+                    NavigationLink(destination: DetailView(tracks: [], collectionId: album.collectionId, collectionName: album.collectionName, releaseYear: album.releaseYear, artworkUrl: album.artworkUrl100)) {
                         HStack {
                             // add image from album.artworkUrl60
                             AsyncImage(url: URL(string: album.artworkUrl60)) { image in
