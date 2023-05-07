@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     },
     Text: {
         fontSize: 40,
-        fontWeight: 'bord',
+        fontWeight: 'bold',
         margin: 15
     },
     TextInput: {
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
         margin: 15,
         padding: 10,
         fontWeight: '500',
-        color: 'Black',
+        color: 'black',
     },
 });
 
