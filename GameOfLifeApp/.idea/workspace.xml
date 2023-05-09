@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="afd0dbde-628a-48f4-b8f6-d12e9e2bb702" name="Changes" comment="gameoflife doen">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameOfLifeApp/ContentView.swift" beforeDir="false" afterPath="$PROJECT_DIR$/GameOfLifeApp/ContentView.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameOfLifeApp/GameOfLifeView.swift" beforeDir="false" afterPath="$PROJECT_DIR$/GameOfLifeApp/GameOfLifeView.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ListByUrlWIthDetails_P12/ListByUrlWIthDetails_P12/ContentView.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../ListByUrlWIthDetails_P12/ListByUrlWIthDetails_P12/ContentView.swift" afterDir="false" />
-    </list>
+    <list default="true" id="afd0dbde-628a-48f4-b8f6-d12e9e2bb702" name="Changes" comment="fix(GameBoard): Made font fit to screen" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -61,7 +56,7 @@
       <option name="presentableId" value="Default" />
       <updated>1683559317702</updated>
       <workItem from="1683559318827" duration="11937000" />
-      <workItem from="1683612762781" duration="4994000" />
+      <workItem from="1683612762781" duration="5619000" />
     </task>
     <task id="LOCAL-00001" summary="gameoflife doen">
       <created>1683583512665</created>
@@ -70,7 +65,21 @@
       <option name="project" value="LOCAL" />
       <updated>1683583512665</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="fix(ContentView): Simplified layout">
+      <created>1683619228404</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1683619228405</updated>
+    </task>
+    <task id="LOCAL-00003" summary="fix(GameBoard): Made font fit to screen">
+      <created>1683619254795</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1683619254795</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -89,7 +98,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="gameoflife doen" />
-    <option name="LAST_COMMIT_MESSAGE" value="gameoflife doen" />
+    <MESSAGE value="fix(ContentView): Simplified layout" />
+    <MESSAGE value="fix(GameBoard): Made font fit to screen" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix(GameBoard): Made font fit to screen" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
