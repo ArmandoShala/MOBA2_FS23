@@ -29,6 +29,8 @@ struct CellView: View {
     var body: some View {
         Text(isAlive ? "🦠" : "😷")
                 .font(.largeTitle)
+                .font(.system(size: 500))
+                .minimumScaleFactor(0.01)
     }
 }
 
