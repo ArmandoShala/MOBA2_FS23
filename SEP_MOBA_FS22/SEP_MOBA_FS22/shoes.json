@@ -1,0 +1,54 @@
+{
+  "resultCount":50,
+  "results": [
+  {
+    "name": "Schuh 1",
+    "preis": "100",
+    "bild": "https://www.koala.ch/cdn-cgi/image/width=700,quality=80/media/catalog/product/4/8/4850592-1.jpg"
+  },
+  {
+    "name": "Schuh 2",
+    "preis": "120",
+    "bild": "https://www.koala.ch/cdn-cgi/image/width=700,quality=80/media/catalog/product/4/8/4850592-1.jpg"
+  },
+  {
+    "name": "Schuh 3",
+    "preis": "150",
+    "bild": "https://www.koala.ch/cdn-cgi/image/width=700,quality=80/media/catalog/product/4/8/4850592-1.jpg"
+  },
+  {
+    "name": "Schuh 4",
+    "preis": "180",
+    "bild": "https://www.koala.ch/cdn-cgi/image/width=700,quality=80/media/catalog/product/4/8/4850592-1.jpg"
+  },
+  {
+    "name": "Schuh 5",
+    "preis": "200",
+    "bild": "https://www.koala.ch/cdn-cgi/image/width=700,quality=80/media/catalog/product/4/8/4850592-1.jpg"
+  },
+  {
+    "name": "Schuh 6",
+    "preis": "220",
+    "bild": "https://www.koala.ch/cdn-cgi/image/width=700,quality=80/media/catalog/product/4/8/4850592-1.jpg"
+  },
+  {
+    "name": "Schuh 7",
+    "preis": "250",
+    "bild": "https://www.koala.ch/cdn-cgi/image/width=700,quality=80/media/catalog/product/4/8/4850592-1.jpg"
+  },
+  {
+    "name": "Schuh 8",
+    "preis": "280",
+    "bild": "https://www.koala.ch/cdn-cgi/image/width=700,quality=80/media/catalog/product/4/8/4850592-1.jpg"
+  },
+  {
+    "name": "Schuh 9",
+    "preis": "300",
+    "bild": "https://www.koala.ch/cdn-cgi/image/width=700,quality=80/media/catalog/product/4/8/4850592-1.jpg"
+  },
+  {
+    "name": "Schuh 10",
+    "preis": "320",
+    "bild": "https://www.koala.ch/cdn-cgi/image/width=700,quality=80/media/catalog/product/4/8/4850592-1.jpg"
+  }
+]}
